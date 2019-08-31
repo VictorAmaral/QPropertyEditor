@@ -30,7 +30,7 @@
 #include <QMetaProperty>
 #include <QSpinBox>
 
-Property::Property(const QString& name /*= QString()*/, QObject* propertyObject /*= 0*/, QObject* parent /*= 0*/) : QObject(parent), 
+Property::Property(const QString& name /*= QString()*/, QObject* propertyObject /*= 0*/, QObject* parent /*= 0*/) : QObject(parent),
 m_propertyObject(propertyObject)
 {
 	setObjectName(name);
@@ -83,7 +83,7 @@ QWidget* Property::createEditor(QWidget *parent, const QStyleOptionViewItem& /*o
 		break;			
 	default:
 		return editor;
-	}
+    }
 	return editor;
 }
 

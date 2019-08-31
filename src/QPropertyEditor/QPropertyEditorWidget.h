@@ -28,6 +28,7 @@
 #define QPROPERTYEDITORWIDGET_H_
 
 #include <QTreeView>
+#include <QPainter>
 
 class QPropertyModel;
 class Property;
@@ -112,7 +113,9 @@ public:
 	 * You can register more than one callback. If one of those callbacks are not used any longer, you can unregister
 	 * it with this method
 	 */
-	void unregisterCustomPropertyCB(UserTypeCB callback);
+    void unregisterCustomPropertyCB(UserTypeCB callback);
+
+    void clear();
 
 private:
 	/// The Model for this view

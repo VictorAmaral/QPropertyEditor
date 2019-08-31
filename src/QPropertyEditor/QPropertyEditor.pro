@@ -19,7 +19,7 @@ HEADERS=    ColorCombo.h \
             EnumProperty.h
 
 INCLUDEPATH+=../../include
-DESTDIR = ../../lib
+DESTDIR = "D:\Main Files\Qt\OTUIEditor\lib"
 
 CONFIG(debug, debug|release) { 
 	TARGET = QPropertyEditord

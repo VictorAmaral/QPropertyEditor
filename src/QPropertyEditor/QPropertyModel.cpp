@@ -47,9 +47,8 @@ struct PropertyPair
 
 QPropertyModel::QPropertyModel(QObject* parent /*= 0*/) : QAbstractItemModel(parent)
 {	
-	m_rootItem = new Property("Root",0, this);   
+    m_rootItem = new Property("Root", 0, this);
 }
-
 
 QPropertyModel::~QPropertyModel()
 {
@@ -110,8 +109,12 @@ QVariant QPropertyModel::data ( const QModelIndex & index, int role /*= Qt::Disp
 		if (index.column() == 1)
 			return item->value(role);
 	case Qt::BackgroundRole:
-		if (item->isRoot())	return QApplication::palette("QTreeView").brush(QPalette::Normal, QPalette::Button).color();
+        //if (item->isRoot())	return QApplication::palette("QTreeView").brush(QPalette::Normal, QPalette::Button).color();
+        if (item->isRoot())	return QVariant();
 		break;
+    case Qt::ForegroundRole:
+        if (item->isRoot())	return QColor("#fff");
+        break;
 	};
 	return QVariant();
 }
@@ -131,16 +134,16 @@ bool QPropertyModel::setData ( const QModelIndex & index, const QVariant & value
 
 Qt::ItemFlags QPropertyModel::flags ( const QModelIndex & index ) const
 {
-	if (!index.isValid())
+    if (!index.isValid())
 		return Qt::ItemIsEnabled;
 	Property *item = static_cast<Property*>(index.internalPointer());
 	// only allow change of value attribute
 	if (item->isRoot())
 		return Qt::ItemIsEnabled;	
-	else if (item->isReadOnly())
-		return Qt::ItemIsDragEnabled | Qt::ItemIsSelectable;	
+    else if (item->isReadOnly())
+        return Qt::ItemIsDragEnabled | Qt::ItemIsSelectable;
 	else
-		return Qt::ItemIsDragEnabled | Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsEditable;
+        return Qt::ItemIsDragEnabled | Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsEditable;
 }
 
 
@@ -151,7 +154,7 @@ QVariant QPropertyModel::headerData ( int section, Qt::Orientation orientation, 
 		switch (section) 
 		{
 			 case 0:
-				 return tr("Name");
+                 return tr("Property");
 			 case 1:
 				 return tr("Value");
 		}
@@ -344,9 +347,10 @@ void QPropertyModel::addDynamicProperties( Property* parent, QObject* propertyOb
 
 void QPropertyModel::clear()
 {
-	beginRemoveRows(QModelIndex(), 0, rowCount());
+    //beginRemoveRows(QModelIndex(), 0, rowCount());
+    beginRemoveRows({}, 0, rowCount() - 1);
 	delete m_rootItem;
-	m_rootItem = new Property("Root",0, this);   
+    m_rootItem = new Property("Root", 0, this);
 	endRemoveRows();
 }
 

@@ -50,7 +50,7 @@ public:
 	 * @param propertyObject the object that contains the property
 	 * @param parent optional parent object 
 	 */
-	Property(const QString& name = QString(), QObject* propertyObject = 0, QObject* parent = 0);
+    Property(const QString& name = QString(), QObject* propertyObject = 0, QObject* parent = 0);
 	
 	/**
 	 * The value stored by this property

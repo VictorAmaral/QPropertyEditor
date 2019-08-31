@@ -35,11 +35,10 @@
 
 QVariantDelegate::QVariantDelegate(QObject* parent) : QItemDelegate(parent)
 {
-	m_finishedMapper = new QSignalMapper(this);
-	connect(m_finishedMapper, SIGNAL(mapped(QWidget*)), this, SIGNAL(commitData(QWidget*)));
-	connect(m_finishedMapper, SIGNAL(mapped(QWidget*)), this, SIGNAL(closeEditor(QWidget*)));
+    m_finishedMapper = new QSignalMapper(this);
+    connect(m_finishedMapper, SIGNAL(mapped(QWidget*)), this, SIGNAL(commitData(QWidget*)));
+    connect(m_finishedMapper, SIGNAL(mapped(QWidget*)), this, SIGNAL(closeEditor(QWidget*)));
 }
-
 
 QVariantDelegate::~QVariantDelegate()
 {
@@ -69,7 +68,7 @@ QWidget *QVariantDelegate::createEditor(QWidget *parent, const QStyleOptionViewI
 	default:
 		editor = QItemDelegate::createEditor(parent, option, index);
 	}
-	parseEditorHints(editor, p->editorHints());
+    parseEditorHints(editor, p->editorHints());
 	return editor;
 }
 
@@ -91,7 +90,7 @@ void QVariantDelegate::setEditorData(QWidget *editor, const QModelIndex &index) 
 		QItemDelegate::setEditorData(editor, index);
 		break;
 	}
-	m_finishedMapper->blockSignals(false);
+    m_finishedMapper->blockSignals(false);
 }
 
 void QVariantDelegate::setModelData(QWidget *editor, QAbstractItemModel *model, const QModelIndex &index) const
@@ -115,7 +114,7 @@ void QVariantDelegate::setModelData(QWidget *editor, QAbstractItemModel *model, 
 	default:
 		QItemDelegate::setModelData(editor, model, index);
 		break;
-	}
+    }
 }
 
 void QVariantDelegate::updateEditorGeometry(QWidget *editor, const QStyleOptionViewItem &option, const QModelIndex& index ) const
